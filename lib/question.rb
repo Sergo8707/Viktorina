@@ -1,6 +1,6 @@
 require 'rexml/document'
 
-class Viktorina
+class Question
 
   def initialize(question, variants, right_answer, time)
     @question = question
@@ -12,7 +12,7 @@ class Viktorina
   #Считываем данные из файла и возвращаем массив обьектов класса Question
   def self.read_from_xml(file_name)
     # Получим абсолютный путь к файлу
-    file_path = File.dirname(__FILE__) + "/" + file_name
+    file_path = File.dirname(__FILE__) + "/../" + file_name
 
     # Если файла нет, сразу закончим выполнение программы, сообщив об этом
     unless File.exist?(file_path)
@@ -37,7 +37,7 @@ class Viktorina
         @right_answer = index + 1 if variant.attributes['right'] == 'true'
       end
 
-      question = Viktorina.new(question_text, variants, @right_answer, answer_time)
+      question = Question.new(question_text, variants, @right_answer, answer_time)
       questions << question
     end
 
@@ -72,15 +72,13 @@ class Viktorina
     else
       if user_answer == @right
         puts 'Верный ответ!'
+        puts
         true
       else
         puts 'Неправильно :-('
+        puts
         false
       end
     end
-  end
-
-  def cln
-    system "clear" or system "cls"
   end
 end

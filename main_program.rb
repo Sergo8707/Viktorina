@@ -1,7 +1,7 @@
-require_relative 'viktorina'
+require_relative 'lib/question'
 require_relative 'lib/sklonjator'
 
-viktorina = Viktorina.read_from_xml('data/questions.xml')
+question = Question.read_from_xml('/data/questions.xml')
 sklonjator = Sklonjator.new
 
 start_time = Time.now
@@ -12,13 +12,11 @@ puts
 
 right_answers = 0
 
-viktorina.each_with_index do |question, index|
+question.each_with_index do |question, index|
   puts "Вопрос № #{index+1}"
   question.show
   right = question.ask
   right_answers += 1 if right
-  sleep(1.5)
-  question.cln
 end
 second_spent = Time.now - start_time.to_i
 
