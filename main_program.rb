@@ -12,10 +12,10 @@ puts
 
 right_answers = 0
 
-question.each_with_index do |question, index|
+question.each_with_index do |questions, index|
   puts "Вопрос № #{index+1}"
-  question.show
-  right = question.ask
+  questions.show
+  right = questions.ask
   right_answers += 1 if right
 end
 second_spent = Time.now - start_time.to_i
